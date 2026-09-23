@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional
 
 import yfinance as yf
 
@@ -45,8 +44,8 @@ def get_quote(ticker: str) -> Quote:
     """
     try:
         info = yf.Ticker(ticker).fast_info
-        price: Optional[float] = info.last_price
-        prev_close: Optional[float] = info.previous_close
+        price: float | None = info.last_price
+        prev_close: float | None = info.previous_close
 
         if price is None or prev_close is None:
             raise QuoteFetchError(f"No data for ticker '{ticker}'")
